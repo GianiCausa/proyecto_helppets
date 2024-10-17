@@ -1,0 +1,22 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%; 
+    width: 100%;  
+    background-image: url('/assets/icon/fondoanimales.avif');
+  }
+
+  .form-container label{
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 30px;
+    width: 320px;
+    background-color: rgb(232, 218, 238);
+  }
+
+  .button-container{
+    display: flex; 
+    justify-content: center; 
+  }
