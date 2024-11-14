@@ -16,19 +16,27 @@ export class RegistroPage implements OnInit {
   constructor(private navCtrl: NavController, private auten: AutenticacionService) { }
 
   validPassword(password: string): boolean {
-    // Expresión regular: al menos una mayúscula, un número y un carácter especial
     const passwordRegEx = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{3,}$/;
     return passwordRegEx.test(password);
   }
 
-  registro(){
-    if (this.password === this.confirmPassword && this.auten.validPassword(this.password)) {
-      this.auten.registerUser(this.email, this.password);
-      console.log('Usuario registrado exitosamente');
-      this.navCtrl.navigateForward('/inicio-sesion');  
+  registro(): void {
+    if (this.isGmailEmail(this.email) && this.password === this.confirmPassword) {
+      if (this.validPassword(this.password)) {
+        this.auten.registerUser(this.email, this.password);
+        console.log("Registro exitoso.");
+          this.navCtrl.navigateForward('/inicio-sesion');
+      } else {
+        console.log("La contraseña no cumple con los requisitos.");
+      }
     } else {
-      alert('Las contraseñas no coinciden o no cumplen con los requisitos.');
+      console.log("El correo debe terminar en @gmail.com y las contraseñas deben coincidir.");
     }
+  }
+
+  // Validador para asegurar que el email termine en "@gmail.com"
+  isGmailEmail(email: string): boolean {
+    return email.endsWith('@gmail.com');
   }
 
   ngOnInit() {

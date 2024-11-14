@@ -7,6 +7,9 @@ export class AutenticacionService {
 
   private readonly EMAIL_KEY = 'registroEmail';
   private readonly PASSWORD_KEY = 'registroPassword';
+  private readonly ADMIN_EMAIL = 'administrador@gmail.com';
+  private readonly ADMIN_ALERT_SHOWN_KEY = 'adminAlertShown';
+
 
   constructor() { }
 
@@ -33,4 +36,19 @@ export class AutenticacionService {
     const passwordRegEx = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{3,}$/;
     return passwordRegEx.test(password);
   }
+
+  isAdmin(email: string): boolean {
+    return email === this.ADMIN_EMAIL;
+  }
+
+  isAdminAlertShown(): boolean {
+    return localStorage.getItem(this.ADMIN_ALERT_SHOWN_KEY) === 'true';
+  }
+
+  // Marcar que la alerta fue mostrada
+  setAdminAlertShown(): void {
+    localStorage.setItem(this.ADMIN_ALERT_SHOWN_KEY, 'true');
+  }
+  
 }
+
